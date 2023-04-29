@@ -1,21 +1,35 @@
+import { useState } from 'react';
 import './App.scss';
 import { Header } from './Components/Header/Header';
+import { Intro } from './Components/Intro/Intro';
+import { Footer } from './Components/Footer/Footer';
+
+function teste(value: any) {
+  console.log(value);
+}
+
 
 function App() {
+  const [formData, setFormData] = useState({q1: false, });
+
+  function handleChange(event: any) {
+    const { name, checked } = event.target;
+    setFormData({
+      ...formData,
+      [name]: checked
+    });
+  };
+
+  console.log(formData.q1)
+
   return (
     <div>
-      < Header />
-      <div className='intro'>
-        <h1>Bem-vindo ao nosso teste de depressão online</h1>
-        <p>
-          Sabemos que a saúde mental é fundamental para o bem-estar de todos, mas muitas vezes é negligenciada ou não discutida abertamente. 
-          Nosso objetivo é ajudá-lo a avaliar sua saúde mental e fornecer informações úteis sobre como lidar com a depressão.
-        </p>
-        <p>
-          Nossa equipe de especialistas em saúde mental desenvolveu este teste de depressão online para ajudá-lo a avaliar seus sintomas e fornecer 
-          informações valiosas sobre a depressão. O teste é fácil de usar e leva apenas alguns minutos para ser concluído.
-        </p>
-      </div>
+      <form action="">
+        <div>
+          <label htmlFor="q1">1. Você está satisfeito com a sua vida?</label>
+          <input type="checkbox"  onClick={handleChange} name="q1" checked={formData.q1} />
+        </div>
+      </form>
     </div>
   );
 }
